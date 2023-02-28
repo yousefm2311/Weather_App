@@ -1,5 +1,6 @@
 abstract class WeatherState{}
 
-class initialState extends WeatherState{}
-class getDatasuccessState extends WeatherState{}
-class loadingState extends WeatherState{}
+class InitialState extends WeatherState{}
+class GetDatasuccessState extends WeatherState{}
+class LoadingState extends WeatherState{}
+

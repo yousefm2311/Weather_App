@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, must_be_immutable, sized_box_for_whitespace
 
+import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -26,26 +27,31 @@ class HomePage extends StatelessWidget {
           appBar: buildAppBar(
             location,
             Icons.space_dashboard_rounded,
-            "${location['name']}",
-            Icons.location_on,
+            "${location['name'] ?? '' }",
+            Icons.location_on ,
+            isLoading: state is! LoadingState,
             onpressed: () {},
           ),
           body: SafeArea(
-            child: Column(
-              children: [
-                buildHomeContainer(
-                    location, current, list, day, date, icon, image,d,currentData),
-                buildArrowDay(context),
-                buildData(list, icon)
-              ],
+            child: ConditionalBuilder(
+              condition: state is! LoadingState,
+              fallback: (context) => const Center(
+                child: CircularProgressIndicator(),
+              ),
+              builder: (context) {
+                return Column(children: [
+                  buildHomeContainer(location, current, list, day, date, icon,
+                      image, d, currentData),
+                  buildArrowDay(context),
+                  buildData(list, icon)
+                ]);
+              },
             ),
           ),
         );
       },
       listener: (context, state) {
-        if (state is loadingState) {
-          
-        }
+        if (state is LoadingState) {}
       },
     );
   }

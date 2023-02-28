@@ -22,6 +22,7 @@ class ViewDays extends StatelessWidget {
             Icons.arrow_back_ios_new_rounded,
             " 7 days",
             Icons.calendar_today_rounded,
+            isLoading: true,
             onpressed: () {
               Navigator.pop(context);
             },

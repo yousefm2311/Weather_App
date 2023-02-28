@@ -8,7 +8,7 @@ import 'package:weather_app/services/bloc/states.dart';
 import "package:http/http.dart" as http;
 
 class CubitWeather extends Cubit<WeatherState> {
-  CubitWeather() : super(initialState());
+  CubitWeather() : super(InitialState());
 
   static CubitWeather get(context) => BlocProvider.of(context);
   String baseUrl = "http://api.weatherapi.com/v1";
@@ -25,7 +25,7 @@ class CubitWeather extends Cubit<WeatherState> {
   Map<String, dynamic> Current = {};
   Map<String, dynamic> CurrentData = {};
   void getWeather() async {
-    emit(loadingState());
+    emit(LoadingState());
     Uri url = Uri.parse(
         "$baseUrl/forecast.json?key=$apiKey&q=$city&days=1&aqi=no&alerts=no");
     http.Response response = await http.get(url);
@@ -41,7 +41,7 @@ class CubitWeather extends Cubit<WeatherState> {
     CurrentData = data["current"];
     print(CurrentData['humidity']);
     model = weatherModel.fromJson(data);
-    emit(getDatasuccessState());
+    emit(GetDatasuccessState());
   }
 
   String getImage() {

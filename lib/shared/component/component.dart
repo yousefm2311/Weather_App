@@ -1,6 +1,9 @@
+import 'dart:convert';
+
 import 'package:conditional_builder_null_safety/conditional_builder_null_safety.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:lottie/lottie.dart';
 import 'package:weather_app/models/model.dart';
 
 Widget defaultText(
@@ -54,6 +57,9 @@ Widget defaultComponent(
       builder: (context) {
         return Column(
           children: [
+            // Lottie.asset(
+            //   'assets/json/clear.json',
+            // ),
             Image.asset(
               '$d',
               width: 200,
@@ -396,8 +402,14 @@ Widget containerDays() => Container(
       ),
     );
 
-buildAppBar(title1, IconData icon, String title, IconData iconTitle,
-        {required Function()? onpressed}) =>
+buildAppBar(
+  title1,
+  IconData icon,
+  String title,
+  IconData iconTitle, {
+  required Function()? onpressed,
+  required bool isLoading,
+}) =>
     AppBar(
       elevation: 0,
       title: Row(
@@ -418,7 +430,8 @@ buildAppBar(title1, IconData icon, String title, IconData iconTitle,
         statusBarIconBrightness: Brightness.dark,
         statusBarBrightness: Brightness.light,
       ),
-      backgroundColor: const Color.fromARGB(255, 49, 178, 253),
+      backgroundColor:
+          isLoading ? Color.fromARGB(255, 49, 178, 253) : Colors.black,
     );
 
 Widget buildHomeContainer(
